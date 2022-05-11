@@ -1,0 +1,4 @@
+1. Server      - echo golang
+    - database - mysql (sql)
+    - Deploy   - AWS cloud
+2. client

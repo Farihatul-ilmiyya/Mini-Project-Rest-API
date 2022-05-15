@@ -13,8 +13,8 @@ type Karyawan struct {
 	Alamat				string		`json:"alamat" form:"alamat"`
 	Id_Divisi			string		`json:"id_divisi" form:"id_divisi"`
 	Id_WilayahKantor	string		`json:"id_wilayahkantor" form:"id_wilayahkantor"`
-	Created_At         time.Time `json:"created_at" form:"created_at"`
-	Updated_At         time.Time `json:"updated_at" form:"updated_at"`
+	Created_At         time.Time 	`json:"created_at" form:"created_at"`
+	Updated_At         time.Time 	`json:"updated_at" form:"updated_at"`
 }
 
 func (Karyawan) TableName() string {

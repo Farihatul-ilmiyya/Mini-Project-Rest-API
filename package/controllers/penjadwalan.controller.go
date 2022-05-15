@@ -8,7 +8,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-	// get all users
+	// get all penjadwalan
 func GetAllPenjadwalanController(c echo.Context) error {
 	ListPenjadwalan, err := db.GetAllPenjadwalan()
 	if err != nil {
@@ -20,7 +20,7 @@ func GetAllPenjadwalanController(c echo.Context) error {
 	})
 }
 
-// get user by id
+// get penjadwalan by id
 func GetPenjadwalanController(c echo.Context) error {
 	Penjadwalan, err := db.GetSinglePenjadwalanById(c.Param("id"))
 	if err != nil {
@@ -32,7 +32,7 @@ func GetPenjadwalanController(c echo.Context) error {
 	})
 }
 
-// create new user
+// create new penjadwalan
 func CreatePenjadwalanController(c echo.Context) error {
 	id := c.Param("id")
 	Penjadwalan := models.Penjadwalan{}
@@ -46,7 +46,7 @@ func CreatePenjadwalanController(c echo.Context) error {
 	})
 }
 
-// delete user by id
+// delete penjadwalan by id
 func DeletePenjadwalanController(c echo.Context) error {
 	id := c.Param("id")
 	err := db.DeletePenjadwalanById(id)
@@ -58,7 +58,7 @@ func DeletePenjadwalanController(c echo.Context) error {
 	})
 }
 
-// update user by id
+// update penjadwalan by id
 func UpdatePenjadwalanController(c echo.Context) error {
 	Penjadwalan := models.Penjadwalan{}
 	c.Bind(&Penjadwalan)

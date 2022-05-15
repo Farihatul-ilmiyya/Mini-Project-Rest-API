@@ -8,7 +8,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-	// get all users
+	// get all divisi
 func GetAllDivisiController(c echo.Context) error {
 	ListDivisi, err := db.GetAllDivisi()
 	if err != nil {
@@ -20,8 +20,8 @@ func GetAllDivisiController(c echo.Context) error {
 	})
 }
 
-// get user by id
-func GetDivisiController(c echo.Context) error {
+// get divisi by id
+func GetController(c echo.Context) error {
 	Divisi, err := db.GetSingleDivisiById(c.Param("id"))
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
@@ -32,7 +32,7 @@ func GetDivisiController(c echo.Context) error {
 	})
 }
 
-// create new user
+// create new presensi
 func CreateDivisiController(c echo.Context) error {
 	id := c.Param("id")
 	Divisi := models.Divisi{}
@@ -46,7 +46,7 @@ func CreateDivisiController(c echo.Context) error {
 	})
 }
 
-// delete user by id
+// delete presensi by id
 func DeleteDivisiController(c echo.Context) error {
 	id := c.Param("id")
 	err := db.DeleteDivisiById(id)
@@ -58,7 +58,7 @@ func DeleteDivisiController(c echo.Context) error {
 	})
 }
 
-// update user by id
+// update presensi by id
 func UpdateDivisiController(c echo.Context) error {
 	Divisi := models.Divisi{}
 	c.Bind(&Divisi)

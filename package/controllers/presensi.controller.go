@@ -8,7 +8,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-	// get all users
+	// get all presensi
 func GetAllPresensiController(c echo.Context) error {
 	ListPresensi, err := db.GetAllPresensi()
 	if err != nil {
@@ -20,7 +20,7 @@ func GetAllPresensiController(c echo.Context) error {
 	})
 }
 
-// get user by id
+// get presensi by id
 func GetPresensiController(c echo.Context) error {
 	Presensi, err := db.GetSinglePresensiById(c.Param("id"))
 	if err != nil {
@@ -32,7 +32,7 @@ func GetPresensiController(c echo.Context) error {
 	})
 }
 
-// create new user
+// create new presensi
 func CreatePresensiController(c echo.Context) error {
 	id := c.Param("id")
 	Presensi := models.Presensi{}
@@ -46,7 +46,7 @@ func CreatePresensiController(c echo.Context) error {
 	})
 }
 
-// delete user by id
+// delete presensi by id
 func DeletePresensiController(c echo.Context) error {
 	id := c.Param("id")
 	err := db.DeletePresensiById(id)
@@ -58,7 +58,7 @@ func DeletePresensiController(c echo.Context) error {
 	})
 }
 
-// update user by id
+// update presensi by id
 func UpdatePresensiController(c echo.Context) error {
 	Presensi := models.Presensi{}
 	c.Bind(&Presensi)

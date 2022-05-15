@@ -8,7 +8,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-	// get all users
+	// get all karyawan
 func GetAllKaryawanController(c echo.Context) error {
 	ListKaryawan, err := db.GetAllKaryawan()
 	if err != nil {
@@ -20,7 +20,7 @@ func GetAllKaryawanController(c echo.Context) error {
 	})
 }
 
-// get user by id
+// get karyawan by id
 func GetKaryawanController(c echo.Context) error {
 	Karyawan, err := db.GetSingleKaryawanById(c.Param("id"))
 	if err != nil {
@@ -32,7 +32,7 @@ func GetKaryawanController(c echo.Context) error {
 	})
 }
 
-// create new user
+// create new karyawan
 func CreateKaryawanController(c echo.Context) error {
 	id := c.Param("id")
 	Karyawan := models.Karyawan{}
@@ -46,7 +46,7 @@ func CreateKaryawanController(c echo.Context) error {
 	})
 }
 
-// delete user by id
+// delete karyawan by id
 func DeleteKaryawanController(c echo.Context) error {
 	id := c.Param("id")
 	err := db.DeleteKaryawanById(id)

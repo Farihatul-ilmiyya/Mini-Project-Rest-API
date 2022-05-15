@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"mini_project/package/controllers"
+	"mini_Project/package/controllers"
 	"net/http"
 	
 	"github.com/labstack/echo/v4"

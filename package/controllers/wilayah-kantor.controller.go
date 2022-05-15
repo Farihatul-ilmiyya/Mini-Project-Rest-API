@@ -8,7 +8,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-	// get all users
+	// get all wilayah kantor
 func GetAllWilayahKantorController(c echo.Context) error {
 	ListWilayahKantor, err := db.GetAllWilayahKantor()
 	if err != nil {
@@ -20,7 +20,7 @@ func GetAllWilayahKantorController(c echo.Context) error {
 	})
 }
 
-// get user by id
+// get wilayah kantor by id
 func GetWilayahKantorController(c echo.Context) error {
 	WilayahKantor, err := db.GetSingleWilayahKantorById(c.Param("id"))
 	if err != nil {
@@ -32,7 +32,7 @@ func GetWilayahKantorController(c echo.Context) error {
 	})
 }
 
-// create new user
+// create new wilayah kantor
 func CreateWilayahKantorController(c echo.Context) error {
 	id := c.Param("id")
 	WilayahKantor := models.WilayahKantor{}
@@ -46,7 +46,7 @@ func CreateWilayahKantorController(c echo.Context) error {
 	})
 }
 
-// delete user by id
+// delete wilayah kantor by id
 func DeleteWilayahKantorController(c echo.Context) error {
 	id := c.Param("id")
 	err := db.DeleteWilayahKantorById(id)
@@ -58,7 +58,7 @@ func DeleteWilayahKantorController(c echo.Context) error {
 	})
 }
 
-// update user by id
+// update wilayah kantor by id
 func UpdateWilayahKantorController(c echo.Context) error {
 	WilayahKantor := models.WilayahKantor{}
 	c.Bind(&WilayahKantor)

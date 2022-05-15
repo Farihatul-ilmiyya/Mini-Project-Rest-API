@@ -8,7 +8,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-	// get all users
+	// get all perizinan
 func GetAllPerizinanController(c echo.Context) error {
 	ListPerizinan, err := db.GetAllPerizinan()
 	if err != nil {
@@ -20,7 +20,7 @@ func GetAllPerizinanController(c echo.Context) error {
 	})
 }
 
-// get user by id
+// get perizinan by id
 func GetPerizinanController(c echo.Context) error {
 	Perizinan, err := db.GetSinglePerizinanById(c.Param("id"))
 	if err != nil {
@@ -32,7 +32,7 @@ func GetPerizinanController(c echo.Context) error {
 	})
 }
 
-// create new user
+// create new perizinan
 func CreatePerizinanController(c echo.Context) error {
 	id := c.Param("id")
 	Perizinan := models.Perizinan{}
@@ -46,7 +46,7 @@ func CreatePerizinanController(c echo.Context) error {
 	})
 }
 
-// delete user by id
+// delete perizinan by id
 func DeletePerizinanController(c echo.Context) error {
 	id := c.Param("id")
 	err := db.DeletePerizinanById(id)
@@ -58,7 +58,7 @@ func DeletePerizinanController(c echo.Context) error {
 	})
 }
 
-// update user by id
+// update perizinan by id
 func UpdatePerizinanController(c echo.Context) error {
 	Perizinan := models.Perizinan{}
 	c.Bind(&Perizinan)

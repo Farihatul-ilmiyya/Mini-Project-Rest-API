@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"mini-project/package/models"
-	"mini-project/package/db"
+	"mini-project/package/repository"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -10,7 +10,7 @@ import (
 
 	// get all wilayah kantor
 func GetAllWilayahKantorController(c echo.Context) error {
-	ListWilayahKantor, err := db.GetAllWilayahKantor()
+	ListWilayahKantor, err := repository.GetAllWilayahKantor()
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -22,7 +22,7 @@ func GetAllWilayahKantorController(c echo.Context) error {
 
 // get wilayah kantor by id
 func GetWilayahKantorController(c echo.Context) error {
-	WilayahKantor, err := db.GetSingleWilayahKantorById(c.Param("id"))
+	WilayahKantor, err := repository.GetWilayahKantorById(c.Param("id"))
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -37,7 +37,7 @@ func CreateWilayahKantorController(c echo.Context) error {
 	id := c.Param("id")
 	WilayahKantor := models.WilayahKantor{}
 	c.Bind(&WilayahKantor)
-	err := db.CreateNewWilayahKantor(WilayahKantor)
+	err := repository.CreateNewWilayahKantor(WilayahKantor)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -49,7 +49,7 @@ func CreateWilayahKantorController(c echo.Context) error {
 // delete wilayah kantor by id
 func DeleteWilayahKantorController(c echo.Context) error {
 	id := c.Param("id")
-	err := db.DeleteWilayahKantorById(id)
+	err := repository.DeleteWilayahKantorById(id)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -62,7 +62,7 @@ func DeleteWilayahKantorController(c echo.Context) error {
 func UpdateWilayahKantorController(c echo.Context) error {
 	WilayahKantor := models.WilayahKantor{}
 	c.Bind(&WilayahKantor)
-	err := db.UpdateWilayahKantorById(c.Param("id"), WilayahKantor)
+	err := repository.UpdateWilayahKantorById(c.Param("id"), WilayahKantor)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}

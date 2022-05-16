@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"mini-project/package/models"
-	"mini-project/package/db"
+	"mini-project/package/repository"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -10,7 +10,7 @@ import (
 
 	// get all users
 func GetAllUserController(c echo.Context) error {
-	ListUser, err := db.GetAllUser()
+	ListUser, err := repository.GetAllUser()
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -22,7 +22,7 @@ func GetAllUserController(c echo.Context) error {
 
 // get user by id
 func GetUserController(c echo.Context) error {
-	User, err := db.GetSingleUserById(c.Param("id"))
+	User, err := repository.GetUserById(c.Param("id"))
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -37,7 +37,7 @@ func CreateUserController(c echo.Context) error {
 	id := c.Param("id")
 	User := models.User{}
 	c.Bind(&User)
-	err := db.CreateNewUser(User)
+	err := repository.CreateNewUser(User)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -49,7 +49,7 @@ func CreateUserController(c echo.Context) error {
 // delete user by id
 func DeleteUserController(c echo.Context) error {
 	id := c.Param("id")
-	err := db.DeleteUserById(id)
+	err := repository.DeleteUserById(id)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -62,7 +62,7 @@ func DeleteUserController(c echo.Context) error {
 func UpdateUserController(c echo.Context) error {
 	User := models.User{}
 	c.Bind(&User)
-	err := db.UpdateUserById(c.Param("id"), User)
+	err := repository.UpdateUserById(c.Param("id"), User)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}

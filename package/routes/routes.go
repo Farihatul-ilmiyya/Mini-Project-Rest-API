@@ -61,7 +61,7 @@ func Init() *echo.Echo {
 
 	// Routes Wilayah Kantor
 	e.GET("/wilayahkantor", controllers.GetAllWilayahKantorController)
-	e.GET("/wilayahkantor/:id", controllers.GetTipeWilayahKantorController)
+	e.GET("/wilayahkantor/:id", controllers.GetWilayahKantorController)
 	e.DELETE("/wilayahkantor/:id", controllers.DeleteWilayahKantorController)
 	e.POST("/wilayahkantor", controllers.CreateWilayahKantorController)
 	e.PUT("/wilayahkantor/:id", controllers.UpdateWilayahKantorController)

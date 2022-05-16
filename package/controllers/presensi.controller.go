@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"mini-project/package/models"
-	"mini-project/package/db"
+	"mini-project/package/repository"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -10,7 +10,7 @@ import (
 
 	// get all presensi
 func GetAllPresensiController(c echo.Context) error {
-	ListPresensi, err := db.GetAllPresensi()
+	ListPresensi, err := repository.GetAllPresensi()
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -22,7 +22,7 @@ func GetAllPresensiController(c echo.Context) error {
 
 // get presensi by id
 func GetPresensiController(c echo.Context) error {
-	Presensi, err := db.GetSinglePresensiById(c.Param("id"))
+	Presensi, err := repository.GetPresensiById(c.Param("id"))
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -37,7 +37,7 @@ func CreatePresensiController(c echo.Context) error {
 	id := c.Param("id")
 	Presensi := models.Presensi{}
 	c.Bind(&Presensi)
-	err := db.CreateNewPresensi(Presensi)
+	err := repository.CreateNewPresensi(Presensi)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -49,7 +49,7 @@ func CreatePresensiController(c echo.Context) error {
 // delete presensi by id
 func DeletePresensiController(c echo.Context) error {
 	id := c.Param("id")
-	err := db.DeletePresensiById(id)
+	err := repository.DeletePresensiById(id)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -62,7 +62,7 @@ func DeletePresensiController(c echo.Context) error {
 func UpdatePresensiController(c echo.Context) error {
 	Presensi := models.Presensi{}
 	c.Bind(&Presensi)
-	err := db.UpdatePresensiById(c.Param("id"), Presensi)
+	err := repository.UpdatePresensiById(c.Param("id"), Presensi)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}

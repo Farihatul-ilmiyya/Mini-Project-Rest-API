@@ -2,17 +2,17 @@ package controllers
 
 import (
 	"mini-project/package/models"
-	"mini-project/package/db"
+	"mini-project/package/repository"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
 )
 
-	// get all divisi
 func GetAllDivisiController(c echo.Context) error {
-	ListDivisi, err := db.GetAllDivisi()
+	ListDivisi, err := repository.GetAllDivisi()
 	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+
 	}
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"message": "success get all divisi",
@@ -20,54 +20,52 @@ func GetAllDivisiController(c echo.Context) error {
 	})
 }
 
-// get divisi by id
-func GetController(c echo.Context) error {
-	Divisi, err := db.GetSingleDivisiById(c.Param("id"))
+func GetDivisiController(c echo.Context) error {
+	Divisi, err := repository.GetDivisiById(c.Param("id"))
 	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+
 	}
-	return c.JSON(http.StatusOK, map[string]interface{}{
-		"message": "success get divisi",
-		"Divisi":    Divisi,
-	})
+	return c.JSON(http.StatusOK, Divisi)
+
 }
 
-// create new divisi
-func CreateDivisiController(c echo.Context) error {
-	id := c.Param("id")
-	Divisi := models.Divisi{}
-	c.Bind(&Divisi)
-	err := db.CreateNewDivisi(Divisi)
-	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
-	}
-	return c.JSON(http.StatusOK, map[string]interface{}{
-		"message": "success create divisi with id '" + id + "'",
-	})
-}
-
-// delete divisi by id
 func DeleteDivisiController(c echo.Context) error {
 	id := c.Param("id")
-	err := db.DeleteDivisiById(id)
+	err := repository.DeleteDivisiById(id)
 	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+
 	}
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"message": "success delete divisi with id '" + id + "'",
 	})
+
 }
 
-// update divisi by id
-func UpdateDivisiController(c echo.Context) error {
-	Divisi := models.Divisi{}
-	c.Bind(&Divisi)
-	err := db.UpdateDivisiById(c.Param("id"), Divisi)
+func CreateDivisiController(c echo.Context) error {
+	id := c.Param("id")
+	NamaDivisi := models.Divisi{}
+	c.Bind(&NamaDivisi)
+	err := repository.CreateNewDivisi(NamaDivisi)
 	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+
 	}
 	return c.JSON(http.StatusOK, map[string]interface{}{
-		"message": "success update divisi",
-		"Divisi":    Divisi,
+		"message": "success insert divisi with id '" + id + "'",
 	})
+
+}
+
+func UpdateDivisiController(c echo.Context) error {
+	NamaDivisi := models.Divisi{}
+	c.Bind(&NamaDivisi)
+	err := repository.UpdateDivisiById(c.Param("id"), NamaDivisi)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": err.Error()})
+
+	}
+	return c.JSON(http.StatusOK, NamaDivisi)
+
 }

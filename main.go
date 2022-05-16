@@ -5,8 +5,12 @@ import (
 	"mini-project/package/routes"
 )
 
+func init() {
+	database.InitDBConnect()
+	database.InitialMigration()
+}
+
 func main() {
-	db.Init()
 	e := routes.Init()
 
 	e.Logger.Fatal(e.Start(":2625"))

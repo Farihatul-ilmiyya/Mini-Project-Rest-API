@@ -1,29 +1,33 @@
-package db
+package database
+
 import (
-	"database/sql"
 	"mini-project/package/config"
-	_"github.com/go-sql-driver/mysql"
+	"mini-project/package/models"
+
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
-var db *sql.DB
-var err error
+var (
+	DB  *gorm.DB
+	err error
+)
 
-func Init(){
+func InitDBConnect() {
 	conf := config.GetConfig()
 
-	connectionString := conf.DB_Username + ":" + conf.DB_Password + "@tcp(" + conf.DB_Host + ":" + conf.DB_Port + ")/" + conf.DB_Name
-	
-	db, err = sql.Open("mysql", connectionString)
-	if err != nil {
-		panic("connectionString error...")
-	}
+	dsn := conf.DB_Username + ":" + conf.DB_Password + "@tcp(" + conf.DB_Host + ":" + conf.DB_Port + ")/" + conf.DB_Name + "?parseTime=true"
 
-	err =db.Ping()
+	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
-		panic("DSN Invalid")
+		panic("failed to connect database")
 	}
 }
 
-func CreateCon() *sql.DB {
-	return db
+func DBConnect() *gorm.DB {
+	return DB
+}
+
+func InitialMigration() {
+	DB.AutoMigrate(&models.Divisi{})
 }

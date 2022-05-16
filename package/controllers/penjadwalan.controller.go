@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"mini-project/package/models"
-	"mini-project/package/db"
+	"mini-project/package/repository"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -10,7 +10,7 @@ import (
 
 	// get all penjadwalan
 func GetAllPenjadwalanController(c echo.Context) error {
-	ListPenjadwalan, err := db.GetAllPenjadwalan()
+	ListPenjadwalan, err := repository.GetAllPenjadwalan()
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -22,7 +22,7 @@ func GetAllPenjadwalanController(c echo.Context) error {
 
 // get penjadwalan by id
 func GetPenjadwalanController(c echo.Context) error {
-	Penjadwalan, err := db.GetSinglePenjadwalanById(c.Param("id"))
+	Penjadwalan, err := repository.GetPenjadwalanById(c.Param("id"))
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -37,7 +37,7 @@ func CreatePenjadwalanController(c echo.Context) error {
 	id := c.Param("id")
 	Penjadwalan := models.Penjadwalan{}
 	c.Bind(&Penjadwalan)
-	err := db.CreateNewPenjadwalan(Penjadwalan)
+	err := repository.CreateNewPenjadwalan(Penjadwalan)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -49,7 +49,7 @@ func CreatePenjadwalanController(c echo.Context) error {
 // delete penjadwalan by id
 func DeletePenjadwalanController(c echo.Context) error {
 	id := c.Param("id")
-	err := db.DeletePenjadwalanById(id)
+	err := repository.DeletePenjadwalanById(id)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -62,7 +62,7 @@ func DeletePenjadwalanController(c echo.Context) error {
 func UpdatePenjadwalanController(c echo.Context) error {
 	Penjadwalan := models.Penjadwalan{}
 	c.Bind(&Penjadwalan)
-	err := db.UpdatePenjadwalanById(c.Param("id"), Penjadwalan)
+	err := repository.UpdatePenjadwalanById(c.Param("id"), Penjadwalan)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}

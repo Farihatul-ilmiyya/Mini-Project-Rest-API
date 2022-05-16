@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"mini-project/package/models"
-	"mini-project/package/db"
+	"mini-project/package/repository"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -10,7 +10,7 @@ import (
 
 	// get all perizinan
 func GetAllPerizinanController(c echo.Context) error {
-	ListPerizinan, err := db.GetAllPerizinan()
+	ListPerizinan, err := repository.GetAllPerizinan()
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -22,7 +22,7 @@ func GetAllPerizinanController(c echo.Context) error {
 
 // get perizinan by id
 func GetPerizinanController(c echo.Context) error {
-	Perizinan, err := db.GetSinglePerizinanById(c.Param("id"))
+	Perizinan, err := repository.GetPerizinanById(c.Param("id"))
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -37,7 +37,7 @@ func CreatePerizinanController(c echo.Context) error {
 	id := c.Param("id")
 	Perizinan := models.Perizinan{}
 	c.Bind(&Perizinan)
-	err := db.CreateNewPerizinan(Perizinan)
+	err := repository.CreateNewPerizinan(Perizinan)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -49,7 +49,7 @@ func CreatePerizinanController(c echo.Context) error {
 // delete perizinan by id
 func DeletePerizinanController(c echo.Context) error {
 	id := c.Param("id")
-	err := db.DeletePerizinanById(id)
+	err := repository.DeletePerizinanById(id)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -62,7 +62,7 @@ func DeletePerizinanController(c echo.Context) error {
 func UpdatePerizinanController(c echo.Context) error {
 	Perizinan := models.Perizinan{}
 	c.Bind(&Perizinan)
-	err := db.UpdatePerizinanById(c.Param("id"), Perizinan)
+	err := repository.UpdatePerizinanById(c.Param("id"), Perizinan)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}

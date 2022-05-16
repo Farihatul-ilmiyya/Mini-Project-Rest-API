@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"mini_project/package/models"
-	"mini_project/package/db"
+	"mini-project/package/models"
+	"mini-project/package/db"
 	"net/http"
 
 	"github.com/labstack/echo/v4"

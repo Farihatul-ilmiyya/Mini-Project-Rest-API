@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"mini_project/package/models"
-	"mini_project/package/db"
+	"mini-project/package/models"
+	"mini-project/package/db"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -32,7 +32,7 @@ func GetController(c echo.Context) error {
 	})
 }
 
-// create new presensi
+// create new divisi
 func CreateDivisiController(c echo.Context) error {
 	id := c.Param("id")
 	Divisi := models.Divisi{}
@@ -46,7 +46,7 @@ func CreateDivisiController(c echo.Context) error {
 	})
 }
 
-// delete presensi by id
+// delete divisi by id
 func DeleteDivisiController(c echo.Context) error {
 	id := c.Param("id")
 	err := db.DeleteDivisiById(id)
@@ -58,7 +58,7 @@ func DeleteDivisiController(c echo.Context) error {
 	})
 }
 
-// update presensi by id
+// update divisi by id
 func UpdateDivisiController(c echo.Context) error {
 	Divisi := models.Divisi{}
 	c.Bind(&Divisi)

@@ -6,7 +6,7 @@ import (
 
 type Presensi struct {
 	Id_Presensi         int       	`gorm:"primaryKey" json:"id_presensi" form:"id_presensi"`
-	Id_Karyawan        	string    	`json:"id_karyawan" form:"id_karyawan"`
+	Id_Karyawan        	string    	`gorm:"foreignKey" json:"id_karyawan" form:"id_karyawan"`
 	Tgl_Presensi		time.Time	`json:"tgl_presensi" form:"tgl_presensi"`
 	Jam_Masuk			time.Time	`json:"jam_masuk" form:"jam_masuk"`
 	Jam_Keluar			time.Time	`json:"jam_keluar" form:"jam_keluar"`

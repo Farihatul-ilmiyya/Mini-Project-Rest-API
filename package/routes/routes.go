@@ -3,19 +3,22 @@ package routes
 import (
 	"mini-project/package/controllers"
 	"net/http"
+	//"mini-project/package/middleware"
 	
 	"github.com/labstack/echo/v4"
 )
 
 func Init() *echo.Echo {
+
 	e := echo.New()
+	
 	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
+		return c.String(http.StatusOK, "Holla, welcome to dunia tipu-tipu ")
 	})
 
 	// Routes Login
 	e.GET("/generate-hash/:password", controllers.GenerateHashPassword)
-	e.POST("/createuser", controllers.CreateUserController)
+	e.POST("/login", controllers.CreateUserController)
 
 	// Routes divisi
 	e.GET("/divisi", controllers.GetAllDivisiController)
@@ -53,11 +56,11 @@ func Init() *echo.Echo {
 	e.PUT("/presensi/:id", controllers.UpdatePresensiController)
 
 	// Routes User
-	e.GET("/user", controllers.GetAllUserController)
-	e.GET("/user/:id", controllers.GetUserController)
-	e.DELETE("/user/:id", controllers.DeleteUserController)
-	e.POST("/user", controllers.CreateUserController)
-	e.PUT("/user/:id", controllers.UpdateUserController)
+	//e.GET("/user", controllers.GetAllUserController)
+	//e.GET("/user/:id", controllers.GetUserController)
+	//e.DELETE("/user/:id", controllers.DeleteUserController)
+	//e.POST("/user", controllers.CreateUserController)
+	//e.PUT("/user/:id", controllers.UpdateUserController)
 
 	// Routes Wilayah Kantor
 	e.GET("/wilayahkantor", controllers.GetAllWilayahKantorController)

@@ -14,8 +14,8 @@ func Init() *echo.Echo {
 	})
 
 	// Routes Login
-	//e.GET("/generate-hash/:password", controllers.GenerateHashPassword)
-	//e.POST("/createuser", controllers.CreateUserController)
+	e.GET("/generate-hash/:password", controllers.GenerateHashPassword)
+	e.POST("/createuser", controllers.CreateUserController)
 
 	// Routes divisi
 	e.GET("/divisi", controllers.GetAllDivisiController)

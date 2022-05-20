@@ -28,7 +28,7 @@ func (ctrl LoginController) Login(c echo.Context) error {
 	} else if arrAuth[0] != "Basic" {
 		fmt.Println("haeder atuh must be basic")
 		return c.JSON(400, map[string]interface{}{
-			"message": "haeder atuh must be basic",
+			"message": "header auth must be basic",
 		})
 	}
 	// "Basic am9lOnNlY3JldA=="

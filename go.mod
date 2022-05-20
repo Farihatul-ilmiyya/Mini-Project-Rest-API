@@ -3,6 +3,7 @@ module mini-project
 go 1.17
 
 require (
+	github.com/DATA-DOG/go-sqlmock v1.5.0
 	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/labstack/echo/v4 v4.7.2
 	github.com/tkanos/gonfig v0.0.0-20210106201359-53e13348de2f

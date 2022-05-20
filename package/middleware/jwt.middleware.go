@@ -9,7 +9,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-var secretKey_HMAC = "miaw26"
+var secretKey_HMAC = []byte("miaw26")
 
 // ValidateJwt as middleware
 func ValidateJwt() func(next echo.HandlerFunc) echo.HandlerFunc {

@@ -1,50 +1,58 @@
 package repository
 
 import (
-	"fmt"
-	"mini-project/package/db"
 	"mini-project/package/models"
+	"fmt"
+
+	"gorm.io/gorm"
 )
 
-func GetAllUser() ([]models.User, error) {
-	var ListUser []models.User
-
-	err := database.DB.Find(&ListUser).Error
-	if err != nil {
-		fmt.Println(err)
-	}
-	return ListUser, err
+type IUserRepo interface {
+	GetAllUser() ([]models.UserCostum, error)
+	GetUserByUsername(username string) (models.User, error)
+	InsertUser(user models.User) error
+	GetUserById(id int) (models.User, error)
 }
 
-func GetUserById(id string) (models.User, error) {
-	var User models.User
-	err := database.DB.First(&User, "id = ?", id).Debug().Error
-	if err != nil {
-		fmt.Println(err)
-	}
-	return User, err
+type UserRepo struct {
+	db *gorm.DB
 }
 
-func DeleteUserById(id string) error {
-	err := database.DB.Delete(&models.User{}, "id = ?", id).Debug().Error
+func NewUserRepo(db *gorm.DB) IUserRepo {
+	return &UserRepo{db}
+}
+
+func (r UserRepo) GetAllUser() ([]models.UserCostum, error) {
+	users := []models.UserCostum{}
+	err := r.db.Find(&users).Error // SELECT * FROM users;
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println("error while GetAllUser", err)
+	}
+	return users, err
+}
+
+func (repo UserRepo) GetUserByUsername(username string) (models.User, error) {
+	var user models.User
+	err := repo.db.Where("username = ?", username).First(&user).Error // SELECT * FROM users WHERE username = ? LIMIT 1;
+	if err != nil {
+		fmt.Println("error while GetUserByUsernameAndPassword", err)
+	}
+	return user, err
+}
+
+func (repo UserRepo) InsertUser(user models.User) error {
+	err := repo.db.Create(&user).Error
+	if err != nil {
+		fmt.Println("error while InsertUser", err)
 	}
 	return err
 }
 
-func CreateNewUser(User models.User) error {
-	err := database.DB.Save(&User).Error
+func (r UserRepo) GetUserById(id int) (models.User, error) {
+	var user models.User
+	err := r.db.Where("id = ?", id).First(&user).Error
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println("error while GetUserById", err)
 	}
-	return err
-}
-
-func UpdateUserById(id string, User models.User) error {
-	err := database.DB.Model(&User).Where("id = ?", id).Updates(User).Debug().Error
-	if err != nil {
-		fmt.Println(err)
-	}
-	return err
+	return user, err
 }

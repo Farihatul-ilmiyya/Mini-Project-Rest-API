@@ -17,9 +17,8 @@ func Init() *echo.Echo {
 	})
 
 	// Routes Login
-	e.GET("/generate-hash/:password", controllers.GenerateHashPassword)
-	e.POST("/login", controllers.CreateUserController)
-
+	
+	
 	// Routes divisi
 	e.GET("/divisi", controllers.GetAllDivisiController)
 	e.GET("/divisi/:id", controllers.GetDivisiController)
@@ -56,10 +55,10 @@ func Init() *echo.Echo {
 	e.PUT("/presensi/:id", controllers.UpdatePresensiController)
 
 	// Routes User
-	//e.GET("/user", controllers.GetAllUserController)
-	//e.GET("/user/:id", controllers.GetUserController)
+	//e.GET("/user", userController.GetAllData)
+	//e.GET("/user/:id", userControllers.GetUser)
 	//e.DELETE("/user/:id", controllers.DeleteUserController)
-	//e.POST("/user", controllers.CreateUserController)
+	//e.POST("/user", controllers.Create)
 	//e.PUT("/user/:id", controllers.UpdateUserController)
 
 	// Routes Wilayah Kantor
